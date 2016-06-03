@@ -9,7 +9,8 @@ import java.util.List;
 /**
  * Created by David on 6/3/2016.
  */
-public class WhistTrumpModel extends cs3500.hw02.GenericStandardDeckGame implements cs3500.hw03.CardGameModel<StandardCard> {
+public class WhistTrumpModel extends cs3500.hw02.GenericStandardDeckGame
+        implements cs3500.hw03.CardGameModel<StandardCard> {
 
 
     private static ArrayList<StandardCard> currentTrick; //Stores cards of the current trick.
@@ -76,10 +77,7 @@ public class WhistTrumpModel extends cs3500.hw02.GenericStandardDeckGame impleme
 
     //Documented in interface.
     public boolean isGameOver() {
-        if(trickCount == lastTrick){
-            return true;
-        }
-        else{return false;}
+        return trickCount == lastTrick;
     }
 
     /**
@@ -101,10 +99,6 @@ public class WhistTrumpModel extends cs3500.hw02.GenericStandardDeckGame impleme
         }
         return sb.toString();
     }
-
-
-
-
 
     /**
      * Throws exception if given player index is not valid.
@@ -131,7 +125,8 @@ public class WhistTrumpModel extends cs3500.hw02.GenericStandardDeckGame impleme
             throw  new IllegalArgumentException("Please select a valid card index " +
                     0 + "-" + (players.get(curPlayer).handSize()-1) + ": ");
         }
-        else if(player.hasSuit(trickSuit) >=0 && !(player.cardSuit(cardIdx).equals(trickSuit))){
+        else if(player.hasSuit(trickSuit) >=0 && !(player.cardSuit(cardIdx).equals(trickSuit))&&
+                !(player.cardSuit(cardIdx).equals(trumpSuit))){
             throw  new IllegalArgumentException("Must play current trick's suit "+trickSuit.toString()
                     +". First instance of "+trickSuit.toString()+" at index "+player.hasSuit(trickSuit));
         }
@@ -149,8 +144,8 @@ public class WhistTrumpModel extends cs3500.hw02.GenericStandardDeckGame impleme
      *
      * Else the card is added to the trick, a check for the player in the lead is performed
      * and the next player is set to current player.
-     * @param playerNo
-     * @param cardIdx
+     * @param playerNo Index of player playing card.
+     * @param cardIdx index of card in players hand.
      */
     private void playCard(int playerNo, int cardIdx){
         StandardCard playCard = super.players.get(playerNo).playCard(cardIdx);
@@ -176,15 +171,13 @@ public class WhistTrumpModel extends cs3500.hw02.GenericStandardDeckGame impleme
         }
     }
 
-    public int determineNext(int given){
+    private int determineNext(int given){
         StandardPlayer player = super.players.get(given);
         if(player.handSize() == 0 && cardsInPlay() > 0){
             return determineNext((given+1)%super.players.size());
         }
         else{ return given;}
     }
-
-
 
     /**
      * Determines the current leader of the trick.
@@ -202,10 +195,9 @@ public class WhistTrumpModel extends cs3500.hw02.GenericStandardDeckGame impleme
         } else if (playCard.suitMatches(trumpSuit)) {
             leadPlayer = curPlayer;
         }
-        else if(playCard.suitMatches(trickSuit) && playCard.faceValue() < highCard.faceValue()){
+        else if(playCard.suitMatches(trickSuit) && playCard.faceValue() < highCard.faceValue()) {
             leadPlayer = curPlayer;
         }
-        else{}
     }
 
     /**

@@ -7,6 +7,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import cs3500.hw02.StandardCard;
+
 import static org.junit.Assert.*;
 
 /**
@@ -14,13 +16,30 @@ import static org.junit.Assert.*;
  */
 public class CardComparatorTest {
 
+    StandardCard aceClubs = new StandardCard(StandardCard.StandardFaceValue.Ace,
+            StandardCard.StandardSuitValue.Clubs);
+    StandardCard aceHearts = new StandardCard(StandardCard.StandardFaceValue.Ace,
+            StandardCard.StandardSuitValue.Hearts);
+    StandardCard twoClubs = new StandardCard(StandardCard.StandardFaceValue.Two,
+            StandardCard.StandardSuitValue.Clubs);
+
+    CardComparator comp = new CardComparator();
+
     @Test
     public void testComparator() {
         cs3500.hw03.CardGameModel model = new WhistTrumpModel();
         List<?> deck = testComparatorHelper(model.getDeck(), new CardComparator());
         model.startPlay(3, deck);
-        System.out.print(model.getGameState());
 
+
+    }
+
+    @Test
+    public void testCompare(){
+        assertEquals(true, comp.compare(aceClubs, aceHearts) < 0 );
+        assertEquals(true, comp.compare(twoClubs, aceHearts) < 0 );
+        assertEquals(true, comp.compare(aceHearts, aceClubs) > 0 );
+        assertEquals(true, comp.compare(aceClubs, aceClubs) == 0 );
     }
 
     private <S, T extends Comparator<S>> List<S> testComparatorHelper(List<S> list, T comparator) {

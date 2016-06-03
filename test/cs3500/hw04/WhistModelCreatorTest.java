@@ -2,6 +2,7 @@ package cs3500.hw04;
 
 import org.junit.Test;
 
+import cs3500.hw02.StandardCard;
 import cs3500.hw03.CardGameModel;
 
 import static org.junit.Assert.*;
@@ -11,14 +12,24 @@ import static org.junit.Assert.*;
  */
 public class WhistModelCreatorTest {
 
+  String trumpGame = "Number of players: 2\nPlayer 1: A♣, Q♣, 10♣, 8♣, 6♣, 4♣, 2♣, K♦, J♦," +
+          " 9♦, 7♦, 5♦, 3♦, A♥, Q♥, 10♥, 8♥, 6♥, 4♥, 2♥, K♠, J♠, 9♠, 7♠, 5♠, 3♠\n" +
+          "Player 2: K♣, J♣, 9♣, 7♣, 5♣, 3♣, A♦, Q♦, 10♦, 8♦, 6♦, 4♦, 2♦," +
+          " K♥, J♥, 9♥, 7♥, 5♥, 3♥, A♠, Q♠, 10♠, 8♠, 6♠, 4♠, 2♠\nPlayer 1 score: 0" +
+          "\nPlayer 2 score: 0\nTurn: Player 1\nTrump suit: ♣";
+  String noTrumpGame = "Number of players: 2\nPlayer 1: A♣, Q♣, 10♣, 8♣, 6♣, 4♣, 2♣, K♦, J♦," +
+          " 9♦, 7♦, 5♦, 3♦, A♥, Q♥, 10♥, 8♥, 6♥, 4♥, 2♥, K♠, J♠, 9♠, 7♠, 5♠, 3♠\n" +
+          "Player 2: K♣, J♣, 9♣, 7♣, 5♣, 3♣, A♦, Q♦, 10♦, 8♦, 6♦, 4♦, 2♦," +
+          " K♥, J♥, 9♥, 7♥, 5♥, 3♥, A♠, Q♠, 10♠, 8♠, 6♠, 4♠, 2♠\nPlayer 1 score: 0" +
+          "\nPlayer 2 score: 0\nTurn: Player 1";
   @Test
-  public void testThings(){
-    WhistModelCreator test = new WhistModelCreator();
-    CardGameModel test2 = test.create(ModelType.TRUMP);
-    test2.startPlay(2, test2.getDeck());
-    System.out.print(test2.getGameState());
-    CardGameModel test3 = test.create(ModelType.NOTRUMP);
-    test3.startPlay(2, test2.getDeck());
-    System.out.println("\n" + test3.getGameState());
+  public void testCreate(){
+
+    CardGameModel<StandardCard> trump = WhistModelCreator.create(WhistModelCreator.ModelType.TRUMP);
+    trump.startPlay(2, trump.getDeck());
+    assertEquals(trumpGame, trump.getGameState() );
+    CardGameModel noTrump = WhistModelCreator.create(WhistModelCreator.ModelType.NOTRUMP);
+    noTrump.startPlay(2, noTrump.getDeck());
+    assertEquals(noTrumpGame, noTrump.getGameState() );
   }
 }

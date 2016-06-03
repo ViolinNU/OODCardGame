@@ -12,10 +12,10 @@ import java.util.Objects;
 public class StandardCard implements GenericCard {
 
 
-  protected StandardSuitValue suit;
-  protected StandardFaceValue face;
-  protected String display;
-  protected int value;
+  private StandardSuitValue suit;
+  private StandardFaceValue face;
+  private String display;
+  private int value;
 
   public static final StandardSuitValue[] suits = StandardSuitValue.values();
   public static final StandardFaceValue[] values = StandardFaceValue.values();
@@ -83,7 +83,7 @@ public class StandardCard implements GenericCard {
   /**
    * Enumerations of possible StandardCard suit and face values.
    */
-  protected enum StandardFaceValue {
+  public enum StandardFaceValue {
     //Four standard suits in alphabetical order.
     //int value indicates their weight for comparison.
     Ace(0, "A"), King(1, "K"), Queen(2, "Q"), Jack(3, "J"), Ten(4, "10"),

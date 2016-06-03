@@ -8,6 +8,7 @@
 import cs3500.hw03.CardGameModel;
 import cs3500.hw03.IWhistController;
 import cs3500.hw03.WhistController;
+import cs3500.hw04.WhistModelCreator;
 //import cs3500.hw04.WhistModelCreator;
 
 import java.io.Reader;
@@ -19,7 +20,7 @@ import java.io.StringReader;
  * very likely will also compile with the tests that we use to evaluate
  * your code.
  */
-/*
+
 public class Hw04TypeChecks {
     void checkSignatures() {
         String input = "4 3";
@@ -28,9 +29,8 @@ public class Hw04TypeChecks {
 
         IWhistController controller = new WhistController(stringReader, out);
         CardGameModel<?> model = WhistModelCreator.create(WhistModelCreator.ModelType.TRUMP);
-        controller.startGame(model, 0);
+        controller.playGame(model, 0);
     }
 
     private Hw04TypeChecks() { throw new RuntimeException("Don't instantiate this: use it as a reference"); }
 }
-*/
