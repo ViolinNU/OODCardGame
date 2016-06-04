@@ -170,6 +170,7 @@ public class WhistTrumpModel extends cs3500.hw02.GenericStandardDeckGame
         }
     }
 
+    //Determines the next player.
     private int determineNext(int given){
         StandardPlayer player = super.players.get(given);
         if(player.handSize() == 0 && cardsInPlay() > 0){

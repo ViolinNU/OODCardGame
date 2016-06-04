@@ -167,6 +167,7 @@ public class WhistModel extends GenericStandardDeckGame implements CardGameModel
     }
   }
 
+  //Determines the next player.
   public int determineNext(int given){
     StandardPlayer player = super.players.get(given);
     if(player.handSize() == 0 && cardsInPlay() > 0){
