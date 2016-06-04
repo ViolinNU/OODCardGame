@@ -125,8 +125,7 @@ public class WhistTrumpModel extends cs3500.hw02.GenericStandardDeckGame
             throw  new IllegalArgumentException("Please select a valid card index " +
                     0 + "-" + (players.get(curPlayer).handSize()-1) + ": ");
         }
-        else if(player.hasSuit(trickSuit) >=0 && !(player.cardSuit(cardIdx).equals(trickSuit))&&
-                !(player.cardSuit(cardIdx).equals(trumpSuit))){
+        else if(player.hasSuit(trickSuit) >=0 && !(player.cardSuit(cardIdx).equals(trickSuit))){
             throw  new IllegalArgumentException("Must play current trick's suit "+trickSuit.toString()
                     +". First instance of "+trickSuit.toString()+" at index "+player.hasSuit(trickSuit));
         }
@@ -240,7 +239,12 @@ public class WhistTrumpModel extends cs3500.hw02.GenericStandardDeckGame
     }
 
     private String trumpMessage(){
-        return "\nTrump suit: " + trumpSuit.toString();
+        if (super.players.size() == 0) {
+            return "\nTrump suit will be decided upon start of play.";
+        }
+        else {
+            return "\nTrump suit: " + trumpSuit.toString();
+        }
     }
 
     /**
