@@ -38,7 +38,8 @@ public class WhistTrumpModel extends cs3500.hw02.GenericStandardDeckGame
      * @param deck the deck of cards to be distributed among the players to start the game
      * @throws IllegalArgumentException
      */
-    public void startPlay(int numPlayers, List<StandardCard> deck) throws IllegalArgumentException {
+    public void startPlay(int numPlayers, List<StandardCard> deck)
+            throws IllegalArgumentException {
         super.startPlay(numPlayers, deck);
         trickSize = super.players.size() - 1;
         lastTrick = 52/super.players.size();
@@ -48,9 +49,11 @@ public class WhistTrumpModel extends cs3500.hw02.GenericStandardDeckGame
 
     /**
      * Overide of getGameState from GenericStandardDeckGame.
-     * added functionality, presents Player 1-n scores, represented by number of tricks
+     * added functionality, presents Player 1-n scores,
+     * represented by number of tricks
      * that player has one.
-     * Also creturns special message representing the game state, {Game Over, Player x turn, etc}
+     * Also creturns special message representing the game state,
+     * {Game Over, Player x turn, etc}
      * @return String representation of the game state.
      */
     public String getGameState() {
@@ -110,6 +113,9 @@ public class WhistTrumpModel extends cs3500.hw02.GenericStandardDeckGame
         if(playerNo < 0 || playerNo > super.players.size()){
             throw new IllegalArgumentException("No such player exists");
         }
+        else if(playerNo != curPlayer){
+            throw new IllegalArgumentException("Not players turn.");
+        }
     }
 
     /**
@@ -126,8 +132,10 @@ public class WhistTrumpModel extends cs3500.hw02.GenericStandardDeckGame
                     0 + "-" + (players.get(curPlayer).handSize()-1) + ": ");
         }
         else if(player.hasSuit(trickSuit) >=0 && !(player.cardSuit(cardIdx).equals(trickSuit))){
-            throw  new IllegalArgumentException("Must play current trick's suit "+trickSuit.toString()
-                    +". First instance of "+trickSuit.toString()+" at index "+player.hasSuit(trickSuit));
+            throw  new IllegalArgumentException
+                    ("Must play current trick's suit "+trickSuit.toString()
+                    +". First instance of "+trickSuit.toString()
+                            +" at index "+player.hasSuit(trickSuit));
         }
     }
 
@@ -195,7 +203,8 @@ public class WhistTrumpModel extends cs3500.hw02.GenericStandardDeckGame
         } else if (playCard.suitMatches(trumpSuit)) {
             leadPlayer = curPlayer;
         }
-        else if(playCard.suitMatches(trickSuit) && playCard.faceValue() < highCard.faceValue()) {
+        else if(playCard.suitMatches(trickSuit) && playCard.faceValue()
+                < highCard.faceValue()) {
             leadPlayer = curPlayer;
         }
     }
